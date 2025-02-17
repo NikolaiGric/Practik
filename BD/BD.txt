@@ -1,0 +1,217 @@
+﻿--DROP DATABASE WarehouseManagement;
+
+CREATE DATABASE WarehouseManagement;
+GO
+select * from Warehouse;
+USE WarehouseManagement;
+GO
+select * from ProductLocation;
+--Categories;
+-- Таблица ролей
+CREATE TABLE Roles (
+    ID_Role INT PRIMARY KEY IDENTITY(1,1),
+    RoleName VARCHAR(100) NOT NULL
+);
+
+-- Таблица сотрудников
+CREATE TABLE Employees (
+    ID_Employee INT PRIMARY KEY IDENTITY(1,1),
+    SurnameEmployee VARCHAR(100) NOT NULL,
+    NameEmployee VARCHAR(100) NOT NULL,
+    MiddleNameEmployee VARCHAR(100) NULL,
+    Login VARCHAR(100) NOT NULL UNIQUE,
+    Email VARCHAR(100) NOT NULL,
+    Password VARCHAR(255) NOT NULL,
+    Role_ID INT NOT NULL,
+    FOREIGN KEY (Role_ID) REFERENCES Roles(ID_Role)
+);
+
+-- Таблица клиентов
+CREATE TABLE Clients (
+    ID_Client INT PRIMARY KEY IDENTITY(1,1),
+    OrganizationName VARCHAR(100) NULL,
+    SurnameClient VARCHAR(100) NULL,
+    NameClient VARCHAR(100) NULL,
+    MiddleNameClient VARCHAR(100) NULL,
+    Email VARCHAR(100) NOT NULL UNIQUE
+);
+
+-- Таблица способов оплаты
+CREATE TABLE PaymentMethods (
+    ID_PaymentMethod INT PRIMARY KEY IDENTITY(1,1),
+    PaymentMethodName VARCHAR(100) NOT NULL
+);
+
+-- Таблица платежей
+CREATE TABLE Payments (
+    ID_Payment INT PRIMARY KEY IDENTITY(1,1),
+    PaymentMethod_ID INT NOT NULL,
+    Client_ID INT NOT NULL,
+    PaymentAmount DECIMAL(10,2) NOT NULL,
+    FOREIGN KEY (PaymentMethod_ID) REFERENCES PaymentMethods(ID_PaymentMethod),
+    FOREIGN KEY (Client_ID) REFERENCES Clients(ID_Client)
+);
+
+-- Таблица категорий товаров
+CREATE TABLE ProductCategories (
+    ID_ProductCategory INT PRIMARY KEY IDENTITY(1,1),
+    CategoryName VARCHAR(100) NOT NULL
+);
+
+-- Таблица производителей
+CREATE TABLE Manufacturers (
+    ID_Manufacturer INT PRIMARY KEY IDENTITY(1,1),
+    ManufacturerName VARCHAR(100) NOT NULL
+);
+
+-- Таблица единиц измерения товаров
+CREATE TABLE ProductUnits (
+    ID_ProductUnit INT PRIMARY KEY IDENTITY(1,1),
+    ProductUnitName VARCHAR(50) NOT NULL
+);
+
+-- Таблица статусов товаров
+CREATE TABLE ProductStatuses (
+    ID_ProductStatus INT PRIMARY KEY IDENTITY(1,1),
+    ProductStatusName VARCHAR(100) NOT NULL
+);
+
+-- Таблица товаров
+CREATE TABLE Products (
+    ID_Product INT PRIMARY KEY IDENTITY(1,1),
+    ProductName VARCHAR(100) NOT NULL,
+    Article VARCHAR(100) NOT NULL UNIQUE,
+    ProductCategory_ID INT NOT NULL,
+    Manufacturer_ID INT NOT NULL,
+    ProductUnit_ID INT NOT NULL,
+    Discount DECIMAL(10,2) NULL,
+    Price DECIMAL(10,2) NOT NULL,
+    ProductStatus_ID INT NOT NULL,
+    FOREIGN KEY (ProductCategory_ID) REFERENCES ProductCategories(ID_ProductCategory),
+    FOREIGN KEY (Manufacturer_ID) REFERENCES Manufacturers(ID_Manufacturer),
+    FOREIGN KEY (ProductUnit_ID) REFERENCES ProductUnits(ID_ProductUnit),
+    FOREIGN KEY (ProductStatus_ID) REFERENCES ProductStatuses(ID_ProductStatus)
+);
+
+-- Таблица расположения товаров на складе
+CREATE TABLE ProductLocation (
+    ID_ProductLocation INT PRIMARY KEY IDENTITY(1,1),
+    Section VARCHAR(10) NOT NULL,
+    Shelf INT NOT NULL,
+    Rack INT NOT NULL
+);
+
+-- Таблица склада
+CREATE TABLE Warehouse (
+    ID_Warehouse INT PRIMARY KEY IDENTITY(1,1),
+    Product_ID INT NOT NULL,
+    ProductLocation_ID INT NULL,
+    Quantity INT NOT NULL CHECK (Quantity >= 0),
+    ProductStatus_ID INT NOT NULL,
+    FOREIGN KEY (Product_ID) REFERENCES Products(ID_Product),
+    FOREIGN KEY (ProductLocation_ID) REFERENCES ProductLocation(ID_ProductLocation),
+    FOREIGN KEY (ProductStatus_ID) REFERENCES ProductStatuses(ID_ProductStatus)
+);
+
+-- Таблица статусов заказов
+CREATE TABLE OrderStatuses (
+    ID_OrderStatus INT PRIMARY KEY IDENTITY(1,1),
+    OrderStatusName VARCHAR(100) NOT NULL
+);
+
+-- Таблица заказов
+CREATE TABLE Orders (
+    ID_Order INT PRIMARY KEY IDENTITY(1,1),
+    Client_ID INT NOT NULL,
+    ShippingDate DATE NULL,
+    OrderDate DATE NOT NULL DEFAULT GETDATE(),
+    OrderStatus_ID INT NOT NULL,
+    FOREIGN KEY (Client_ID) REFERENCES Clients(ID_Client),
+    FOREIGN KEY (OrderStatus_ID) REFERENCES OrderStatuses(ID_OrderStatus)
+);
+
+-- Таблица деталей заказов
+CREATE TABLE OrderDetails (
+    ID_OrderDetail INT PRIMARY KEY IDENTITY(1,1),
+    Order_ID INT NOT NULL,
+    Product_ID INT NOT NULL,
+    Quantity INT NOT NULL CHECK (Quantity > 0),
+	TotalAmount DECIMAL(18, 2) NOT NULL DEFAULT 0,
+    FOREIGN KEY (Order_ID) REFERENCES Orders(ID_Order),
+    FOREIGN KEY (Product_ID) REFERENCES Products(ID_Product)
+);
+
+-- Роли
+INSERT INTO Roles (RoleName) VALUES 
+('Менеджер по продажам'), 
+('Администратор склада'), 
+('Руководитель');
+
+-- Сотрудники
+INSERT INTO Employees (SurnameEmployee, NameEmployee, MiddleNameEmployee, Email, Login, Password, Role_ID) VALUES 
+('Иванов', 'Иван', 'Иванович', 'ivanov@mail.ru', 'ivanov123', 'hashed_password', 1),
+('Петров', 'Петр', 'Петрович', 'petrov@mail.ru', 'petrov123', 'hashed_password', 2),
+('Сидоров', 'Сидор', 'Сидорович', 'sidorov@mail.ru', 'sidorov123', 'hashed_password', 3);
+
+-- Клиенты
+INSERT INTO Clients (OrganizationName, SurnameClient, NameClient, MiddleNameClient, Email) VALUES 
+('ДомСтрой', 'Смирнов', 'Алексей', 'Сергеевич', 'smirnov@mail.ru'),
+(NULL, 'Козлов', 'Владимир', 'Игоревич', 'kozlov@mail.ru');
+
+-- Способы оплаты
+INSERT INTO PaymentMethods (PaymentMethodName) VALUES 
+('Карта'), 
+('Наличные');
+
+-- Категории товаров
+INSERT INTO ProductCategories (CategoryName) VALUES 
+('Утеплитель'), 
+('Кирпич');
+
+-- Производители
+INSERT INTO Manufacturers (ManufacturerName) VALUES 
+('СтройДом'), 
+('КирпичМастер');
+
+-- Единицы измерения
+INSERT INTO ProductUnits (ProductUnitName) VALUES 
+('шт'), 
+('м2');
+
+-- Статусы товаров
+INSERT INTO ProductStatuses (ProductStatusName) VALUES 
+('Доступен'), 
+('Ожидается поступление');
+
+-- Товары
+INSERT INTO Products (ProductName, Article, ProductCategory_ID, Manufacturer_ID, ProductUnit_ID, Discount, Price, ProductStatus_ID) VALUES 
+('Базальт', '1236894823', 1, 1, 1, 300, 1000, 1),
+('Красный кирпич', '654789321', 2, 2, 1, NULL, 50, 1);
+select * from OrderDetails;
+select * from Orders;
+-- Локация на складе
+INSERT INTO ProductLocation (Section, Shelf, Rack) VALUES 
+('А', 15, 3),
+('Б', 10, 2);
+
+-- Склад
+INSERT INTO Warehouse (Product_ID, ProductLocation_ID, Quantity, ProductStatus_ID) VALUES 
+(1, 1, 50, 1),
+(2, 2, 200, 1);
+
+-- Статусы заказов
+INSERT INTO OrderStatuses (OrderStatusName) VALUES 
+('В обработке'), 
+('Завершен');
+
+-- Заказы
+INSERT INTO Orders (Client_ID, ShippingDate, OrderDate, OrderStatus_ID, TotalAmount) VALUES 
+(1, '2025-02-15', '2025-02-10', 1, 15000.00),
+(2, NULL, '2025-02-11', 1, 5000.00);
+
+-- Детали заказов
+INSERT INTO OrderDetails (Order_ID, Product_ID, Quantity) VALUES 
+(1, 1, 2),
+(1, 2, 50),
+(2, 2, 10);
+ 

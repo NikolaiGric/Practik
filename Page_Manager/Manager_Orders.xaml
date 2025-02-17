@@ -1,0 +1,34 @@
+﻿<Page x:Class="Practik.Page_Manager.Manager_Orders"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Practik.Page_Manager"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Manager_Orders">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Таблица для отображения товаров в корзине -->
+        <DataGrid x:Name="CartDataGrid" AutoGenerateColumns="False" Grid.Row="0">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding ProductName}" Header="Товар"/>
+                <DataGridTextColumn Binding="{Binding Quantity}" Header="Количество"/>
+                <DataGridTextColumn Binding="{Binding Price}" Header="Цена"/>
+                <DataGridTextColumn Binding="{Binding TotalAmount}" Header="Сумма"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Панель управления (Добавить товар, Удалить, Оформить) -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+            <Button Content="Добавить товар" Click="AddToCart_Click" Width="150" Margin="5"/>
+            <Button Content="Удалить товар" Click="RemoveFromCart_Click" Width="150" Margin="5"/>
+            <Button Content="Оформить заказ" Click="Checkout_Click" Width="150" Margin="5"/>
+        </StackPanel>
+    </Grid>
+</Page>

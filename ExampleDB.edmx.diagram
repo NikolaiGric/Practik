@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d97a7ef578654f2497a3994c11ee5278" Name="Diagram1" ZoomLevel="111">
+        <EntityTypeShape EntityType="WarehouseManagementModel.Clients" Width="1.5" PointX="0.75" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="WarehouseManagementModel.Employees" Width="1.5" PointX="5" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="WarehouseManagementModel.Manufacturers" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="WarehouseManagementModel.OrderDetails" Width="1.5" PointX="5.25" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="WarehouseManagementModel.Orders" Width="1.5" PointX="3" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WarehouseManagementModel.OrderStatuses" Width="1.5" PointX="0.75" PointY="17.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="WarehouseManagementModel.PaymentMethods" Width="1.5" PointX="0.75" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WarehouseManagementModel.Payments" Width="1.5" PointX="3" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="WarehouseManagementModel.ProductCategories" Width="1.5" PointX="0.75" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WarehouseManagementModel.ProductLocation" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WarehouseManagementModel.Products" Width="1.5" PointX="3" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WarehouseManagementModel.ProductStatuses" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="WarehouseManagementModel.ProductUnits" Width="1.5" PointX="0.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WarehouseManagementModel.Roles" Width="1.5" PointX="2.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WarehouseManagementModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="WarehouseManagementModel.Warehouse" Width="1.5" PointX="8.25" PointY="3.5" IsExpanded="true" />
+        <AssociationConnector Association="WarehouseManagementModel.FK__Orders__Client_I__5EBF139D" ManuallyRouted="false" />
+        <AssociationConnector Association="WarehouseManagementModel.FK__Payments__Client__4316F928" ManuallyRouted="false" />
+        <AssociationConnector Association="WarehouseManagementModel.FK__Employees__Role___3A81B327" ManuallyRouted="false" />
+        <AssociationConnector Association="WarehouseManagementModel.FK__Products__Manufa__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="WarehouseManagementModel.FK__OrderDeta__Order__6383C8BA" ManuallyRouted="false" />
+        <AssociationConnector Association="WarehouseManagementModel.FK__OrderDeta__Produ__6477ECF3" ManuallyRouted="false" />
+        <AssociationConnector Association="WarehouseManagementModel.FK__Orders__OrderSta__5FB337D6" ManuallyRouted="false" />
+        <AssociationConnector Association="WarehouseManagementModel.FK__Payments__Paymen__4222D4EF" ManuallyRouted="false" />
+        <AssociationConnector Association="WarehouseManagementModel.FK__Products__Produc__4E88ABD4" ManuallyRouted="false" />
+        <AssociationConnector Association="WarehouseManagementModel.FK__Warehouse__Produ__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="WarehouseManagementModel.FK__Products__Produc__5070F446" ManuallyRouted="false" />
+        <AssociationConnector Association="WarehouseManagementModel.FK__Products__Produc__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="WarehouseManagementModel.FK__Warehouse__Produ__571DF1D5" ManuallyRouted="false" />
+        <AssociationConnector Association="WarehouseManagementModel.FK__Warehouse__Produ__59063A47" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

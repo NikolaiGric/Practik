@@ -1,0 +1,37 @@
+﻿<Page x:Class="Practik.Page_Manager.Manager_Reports"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Practik.Page_Manager"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Manager_Reports">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="74*"/>
+            <RowDefinition Height="30*"/>
+            <RowDefinition Height="190*"/>
+            <RowDefinition Height="161*"/>
+        </Grid.RowDefinitions>
+        <Frame x:Name="PageFrame" Grid.Row="0" Grid.RowSpan="4" Navigated="PageFrame_Navigated"/>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button FontSize="20" Grid.Column="0" x:Name="V1" Height="55" Click="V1_Click">Продажи</Button>
+            <Button FontSize="20" Grid.Column="1" x:Name="V2" Height="55" Click="V2_Click">Остатки</Button>
+            <Button FontSize="20" Grid.Column="2" x:Name="V3" Height="55" Click="V3_Click">Популярное</Button>
+        </Grid>
+        <Grid  Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="end" Width="75" Height="25" HorizontalAlignment="Left"  Content="Назад" Margin="30,0,0,0" Click="end_Click"/>
+        </Grid>
+    </Grid>
+</Page>

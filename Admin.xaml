@@ -1,0 +1,64 @@
+﻿<Window x:Class="Practik.Leader_Clients"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Practik"
+        mc:Ignorable="d"
+        Title="Leader_Clients" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="115*"/>
+            <RowDefinition Height="60*"/>
+            <RowDefinition Height="65*"/>
+        </Grid.RowDefinitions>
+        <Frame x:Name="PageFrame" Grid.Row="1" Grid.RowSpan="3" Navigated="PageFrame_Navigated"/>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button FontSize="18" x:Name="products" Height="55" Click="products_Click">Товары</Button>
+            <Button FontSize="18" Grid.Column="1" x:Name="Rep_Prodasi" Height="55" Click="Rep_Prodasi_Click">Отчеты (продажи)</Button>
+            <Button FontSize="18" Grid.Column="2" x:Name="Rep_Ostatki" Height="55" Click="Rep_Ostatki_Click">Отчеты (остатки)</Button>
+            <Button FontSize="18" Grid.Column="3" x:Name="Rep_Popylarnoe" Height="55" Click="Rep_Popylarnoe_Click">Отчеты (популярное)</Button>
+        </Grid>
+        
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+        </Grid>
+        <Grid Grid.Row="3" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="21*"/>
+                <ColumnDefinition Width="79*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                </Grid>
+            <Grid Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>
