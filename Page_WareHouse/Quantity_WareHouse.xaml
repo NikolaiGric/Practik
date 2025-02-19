@@ -9,6 +9,60 @@
       Title="Quantity_WareHouse">
 
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="74*"/>
+            <RowDefinition Height="190*"/>
+            <RowDefinition Height="161*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+        </Grid>
+        <DataGrid x:Name="DGPrCrud" AutoGenerateColumns="False" Grid.Row="1">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding ID_Warehouse}" Header="ID"/>
+                <DataGridTextColumn Binding="{Binding Products.ProductName}" Header="Название продукта"/>
+                <DataGridTextColumn Binding="{Binding Quantity}" Header="Количество"/>
+                <DataGridTextColumn Binding="{Binding ProductLocation.Section}" Header="Секция"/>
+                <DataGridTextColumn Binding="{Binding ProductLocation.Rack}" Header="Шкаф"/>
+                <DataGridTextColumn Binding="{Binding ProductLocation.Shelf}" Header="Полка"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="21*"/>
+                <ColumnDefinition Width="79*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Button x:Name="Create" Click="Create_Click" Width="130" Height="30" FontSize="20" >Добавить</Button>
+                <Button Grid.Row="1" x:Name="Update" Click="Update_Click" Width="130" Height="30" FontSize="20" >Изменить</Button>
+                <Button Grid.Row="2" x:Name="Delete" Click="Delete_Click" Width="130" Height="30" FontSize="20" >Удалить</Button>
+            </Grid>
+            <Grid Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBox x:Name="Quantity" Grid.Row="0" Grid.Column="0" Width="200" Height="30" Text="Количество"/>
+                <ComboBox x:Name="ComboBoxSection" Grid.Row="0" Grid.Column="1" Width="200" Height="30"/>
+                <ComboBox x:Name="ComboBoxShelf" Grid.Row="1" Grid.Column="0" Width="200" Height="30"/>
+                <ComboBox x:Name="ComboBoxRack" Grid.Row="1" Grid.Column="1" Width="200" Height="30"/>
+            </Grid>
+        </Grid>
     </Grid>
 </Page>
+    
+

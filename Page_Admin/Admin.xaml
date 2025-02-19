@@ -21,10 +21,10 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button FontSize="18" x:Name="products" Height="55" Click="products_Click">Товары</Button>
-            <Button FontSize="18" Grid.Column="1" x:Name="Rep_Prodasi" Height="55" Click="Rep_Prodasi_Click">Отчеты (продажи)</Button>
-            <Button FontSize="18" Grid.Column="2" x:Name="Rep_Ostatki" Height="55" Click="Rep_Ostatki_Click">Отчеты (остатки)</Button>
-            <Button FontSize="18" Grid.Column="3" x:Name="Rep_Popylarnoe" Height="55" Click="Rep_Popylarnoe_Click">Отчеты (популярное)</Button>
+            <Button FontSize="16" x:Name="products" Height="55" Click="products_Click">Товары</Button>
+            <Button FontSize="16" Grid.Column="1" x:Name="Rep_Prodasi" Height="55" Click="Rep_Prodasi_Click">Отчеты (продажи)</Button>
+            <Button FontSize="16" Grid.Column="2" x:Name="Rep_Ostatki" Height="55" Click="Rep_Ostatki_Click">Отчеты (остатки)</Button>
+            <Button FontSize="16" Grid.Column="3" x:Name="Rep_Popylarnoe" Height="55" Click="Rep_Popylarnoe_Click">Отчеты (популярное)</Button>
         </Grid>
         
         <Grid Grid.Row="2">

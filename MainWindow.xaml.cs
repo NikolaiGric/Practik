@@ -17,13 +17,12 @@ namespace Practik
         public MainWindow()
         {
             InitializeComponent();
-            //Manager manager = new Manager();
-            //manager.Show();
+            //Administrator_Wh ad = new Administrator_Wh();
+            //ad.Show();
             //Close();
-            //Administration_Wh_WareHouse administrator = new Administration_Wh_WareHouse();
-            //administrator.Show();
-            Administrator_Wh administrator = new Administrator_Wh();
+            Administration_Wh_WareHouse administrator = new Administration_Wh_WareHouse();
             administrator.Show();
+            this.Close();
         }
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)

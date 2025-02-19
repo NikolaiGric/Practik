@@ -12,7 +12,7 @@
             <RowDefinition Height="190*"/>
             <RowDefinition Height="161*"/>
         </Grid.RowDefinitions>
-        <Frame x:Name="PageFrame" Grid.Row="1" Grid.RowSpan="2" Navigated="PageFrame_Navigated"/>
+        <Frame x:Name="PageFrame" Grid.Row="0" Grid.RowSpan="3" Navigated="PageFrame_Navigated"/>
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -20,8 +20,8 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Button FontSize="20" Grid.Column="0" x:Name="Products" Height="55" Click="Products_Click">Товары</Button>
-            <Button FontSize="20" Grid.Column="1" x:Name="WareHouse" Height="55" Click="WareHouse_Click">Склад</Button>
-            <Button FontSize="20" Grid.Column="2" x:Name="Location" Height="55" Click="Location_Click">Локация товара</Button>
+            <Button FontSize="20" Grid.Column="1" x:Name="WareHouse" Height="55" Click="WareHouse_Click">Локация товаров</Button>
+            <Button FontSize="20" Grid.Column="2" x:Name="Location" Height="55" Click="Location_Click">Склад</Button>
         </Grid>
     </Grid>
 </Window>

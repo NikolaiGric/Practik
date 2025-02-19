@@ -53,8 +53,8 @@ Background="White" >
                 </Style>
             </DataGrid.CellStyle>
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding ProductName}" Header="Название Товара"/>
-                <DataGridTextColumn Binding="{Binding Warehouse.Quantity}" Header="Осталось на складе"/>
+                <DataGridTextColumn Binding="{Binding Products.ProductName}" Header="Название Товара"/>
+                <DataGridTextColumn Binding="{Binding Quantity}" Header="Осталось на складе"/>
             </DataGrid.Columns>
         </DataGrid>
         <Grid Grid.Row="3">

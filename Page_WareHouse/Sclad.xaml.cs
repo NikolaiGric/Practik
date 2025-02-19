@@ -29,7 +29,7 @@ namespace Practik
         }
         private void Products_Click(object sender, RoutedEventArgs e)
         {
-            PageFrame.Content = new Manager_Products();
+            PageFrame.Content = new Product_WareHouse();
         }
 
         private void WareHouse_Click(object sender, RoutedEventArgs e)

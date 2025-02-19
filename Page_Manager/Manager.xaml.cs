@@ -50,11 +50,11 @@ namespace Practik
 
         private void Reports_Click(object sender, RoutedEventArgs e)
         {
-            PageFrame.Content = new Manager_Reports();
+            Manager_Reports mg = new Manager_Reports();
+            mg.Show();
             Orders.Visibility = Visibility.Hidden;
             Reports.Visibility = Visibility.Hidden;
             Products.Visibility = Visibility.Hidden;
-            // 
         }
         private void PageFrame_Navigated(object sender, NavigationEventArgs e)
         {

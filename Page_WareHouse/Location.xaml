@@ -12,7 +12,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="74*"/>
             <RowDefinition Height="190*"/>
-            <RowDefinition Height="191*"/>
+            <RowDefinition Height="161*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
@@ -22,7 +22,7 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
         </Grid>
-        <DataGrid x:Name="DGPrCrud" AutoGenerateColumns="False" SelectionChanged="DGPrCrud_SelectionChanged" Grid.Row="1">
+        <DataGrid x:Name="DGPrCrud" AutoGenerateColumns="False" Grid.Row="1">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding ID_ProductLocation}" Header="ID"/>
                 <DataGridTextColumn Binding="{Binding Section}" Header="Секция"/>
@@ -54,9 +54,9 @@
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <TextBox x:Name="Section" Grid.Row="0" Grid.Column="0" Width="200" Height="30" Text="Секция"/>
-                <TextBox x:Name="Shelf" Grid.Row="1" Grid.Column="0" Width="200" Height="30" Text="Стеллаж"/>
-                <TextBox x:Name="Rack" Grid.Row="0" Grid.Column="1" Width="200" Height="30" Text="Полка"/>
+                <TextBox x:Name="Sections" Grid.Row="0" Grid.Column="0" Width="200" Height="30" Text="Секция"/>
+                <TextBox x:Name="Shelfs" Grid.Row="1" Grid.Column="0" Width="200" Height="30" Text="Стеллаж"/>
+                <TextBox x:Name="Racks" Grid.Row="0" Grid.Column="1" Width="200" Height="30" Text="Полка"/>
             </Grid>
         </Grid>
     </Grid>

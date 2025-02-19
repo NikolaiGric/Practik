@@ -21,7 +21,6 @@ namespace Practik.Page_Manager
     public partial class Manager_Products : Page
     {
         WarehouseManagementEntities context = new WarehouseManagementEntities();
-
         public Manager_Products()
         {
             InitializeComponent();

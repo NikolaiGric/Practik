@@ -1,0 +1,52 @@
+﻿<Page x:Class="Practik.Page_Admin.Reports_Full.Many"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Practik.Page_Admin.Reports_Full"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Отчет по продажам">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70*"/>
+            <RowDefinition Height="280*"/>
+            <RowDefinition Height="100*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Таблица с данными -->
+        <DataGrid x:Name="SalesReportDgr" Grid.Row="1"
+                  Width="770"
+                  AutoGenerateColumns="False"
+                  ColumnWidth="*"
+                  Background="White">
+            <DataGrid.ColumnHeaderStyle>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                    <Setter Property="BorderBrush" Value="Black"/>
+                    <Setter Property="FontSize" Value="16"/>
+                </Style>
+            </DataGrid.ColumnHeaderStyle>
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                    <Setter Property="BorderBrush" Value="Black"/>
+                    <Setter Property="Padding" Value="5"/>
+                    <Setter Property="FontSize" Value="15"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                </Style>
+            </DataGrid.CellStyle>
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding RowNumber}" Header="№"/>
+                <DataGridTextColumn Binding="{Binding ProductName}" Header="Товар"/>
+                <DataGridTextColumn Binding="{Binding Quantity}" Header="Количество"/>
+                <DataGridTextColumn Binding="{Binding Article}" Header="Единица"/>
+                <DataGridTextColumn Binding="{Binding Price}" Header="Цена"/>
+                <DataGridTextColumn Binding="{Binding Total}" Header="Сумма"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+            <Button Content="Экспорт в PDF" Click="ExportToPdf" Grid.Row="2"/>
+    </Grid>
+</Page>

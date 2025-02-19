@@ -34,7 +34,7 @@
         <AssociationConnector Association="WarehouseManagementModel.FK__Products__Produc__5070F446" ManuallyRouted="false" />
         <AssociationConnector Association="WarehouseManagementModel.FK__Products__Produc__5165187F" ManuallyRouted="false" />
         <AssociationConnector Association="WarehouseManagementModel.FK__Warehouse__Produ__571DF1D5" ManuallyRouted="false" />
-        <AssociationConnector Association="WarehouseManagementModel.FK__Warehouse__Produ__59063A47" ManuallyRouted="false" />
+        <AssociationConnector ManuallyRouted="false" Association="WarehouseManagementModel.FK__Warehouse__Produ__59063A47" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

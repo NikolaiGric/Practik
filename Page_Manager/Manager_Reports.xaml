@@ -1,13 +1,11 @@
-﻿<Page x:Class="Practik.Page_Manager.Manager_Reports"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Practik.Page_Manager"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="Manager_Reports">
-
+﻿<Window x:Class="Practik.Manager_Reports"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Practik"
+        mc:Ignorable="d"
+        Title="Manager_Reports" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="74*"/>
@@ -34,4 +32,4 @@
             <Button x:Name="end" Width="75" Height="25" HorizontalAlignment="Left"  Content="Назад" Margin="30,0,0,0" Click="end_Click"/>
         </Grid>
     </Grid>
-</Page>
+</Window>

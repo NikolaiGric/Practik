@@ -1,12 +1,12 @@
-﻿<Page x:Class="Practik.Page_Manager.Reports_Full.Prodasi"
+﻿<Page x:Class="Practik.Page_Admin.Reports_Full.Money"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Practik.Page_Manager.Reports_Full"
+      xmlns:local="clr-namespace:Practik.Page_Admin.Reports_Full"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Продажи">
+      Title="Money">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -20,10 +20,10 @@
         <Frame x:Name="PageFrame" Grid.Row="0" Grid.RowSpan="4"/>
 
         <DataGrid x:Name="FiltrationDgr" Grid.Row="2"
-                  Width="770"
-                  AutoGenerateColumns="False"
-                  ColumnWidth="*"
-                  Background="White">
+              Width="770"
+              AutoGenerateColumns="False"
+              ColumnWidth="*"
+              Background="White">
             <DataGrid.ColumnHeaderStyle>
                 <Style TargetType="DataGridColumnHeader">
                     <Setter Property="BorderThickness" Value="0,0,0,1"/>

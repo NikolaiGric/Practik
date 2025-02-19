@@ -25,17 +25,7 @@ namespace Practik.Page_Manager.Reports_Full
         public Ostatki()
         {
             InitializeComponent();
-            FiltrationDgr.ItemsSource = context.Products.ToList();
-        }
-
-        private void FilterReport(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void ClearFilters(object sender, RoutedEventArgs e)
-        {
-
+            FiltrationDgr.ItemsSource = context.Warehouse.ToList();
         }
 
         private void ExportToPdf(object sender, RoutedEventArgs e)

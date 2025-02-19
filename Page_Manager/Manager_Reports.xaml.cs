@@ -14,12 +14,12 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Practik.Page_Manager
+namespace Practik
 {
     /// <summary>
     /// Логика взаимодействия для Manager_Reports.xaml
     /// </summary>
-    public partial class Manager_Reports : Page
+    public partial class Manager_Reports : Window
     {
         public Manager_Reports()
         {
@@ -42,11 +42,13 @@ namespace Practik.Page_Manager
             V2.Visibility = Visibility.Hidden;
             V3.Visibility = Visibility.Hidden;
             end.Visibility = Visibility.Hidden;
-            PageFrame.Content = null;
+            Administrator_Wh administrator = new Administrator_Wh();
+            administrator.Show();
+            this.Close();
 
         }
 
-            private void V1_Click(object sender, RoutedEventArgs e)
+        private void V1_Click(object sender, RoutedEventArgs e)
         {
             PageFrame.Content = new Prodasi();
 
