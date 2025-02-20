@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms.VisualStyles;
 
 namespace Practik.Page_WareHouse
 {
@@ -155,12 +156,15 @@ namespace Practik.Page_WareHouse
         {
             try
             {
-                if (DGPrCrud.SelectedItem is Warehouse selected)
+                Warehouse selected = DGPrCrud.SelectedItem as Warehouse;
+
+                if (selected != null)
                 {
                     Quantity.Text = selected.Quantity.ToString();
-                    ComboBoxSection.SelectedItem = selected.ProductLocation?.Section;
-                    ComboBoxShelf.SelectedItem = selected.ProductLocation?.Shelf;
-                    ComboBoxRack.SelectedItem = selected.ProductLocation?.Rack;
+                    ComboBoxSection.SelectedItem = selected.ProductLocation.Section;
+                    ComboBoxShelf.SelectedItem = selected.ProductLocation.Shelf;
+                    ComboBoxRack.SelectedItem = selected.ProductLocation.Rack;
+
                 }
             }
             catch (Exception ex)

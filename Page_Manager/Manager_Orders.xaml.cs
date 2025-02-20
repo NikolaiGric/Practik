@@ -20,9 +20,9 @@ namespace Practik
 
         private void LoadUsers()
         {
-            var users = context.Clients.Select(c => new { c.ID_Client, c.NameClient }).ToList();
+            var users = context.Clients.Select(c => new { c.ID_Client, c.SurnameClient }).ToList();
             ComboBoxUsers.ItemsSource = users;
-            ComboBoxUsers.DisplayMemberPath = "FullName";
+            ComboBoxUsers.DisplayMemberPath = "SurnameClient";
             ComboBoxUsers.SelectedValuePath = "ID_Client";
         }
 
@@ -57,6 +57,7 @@ namespace Practik
             }
         }
 
+
         private void ButtonRemoveProduct_Click(object sender, RoutedEventArgs e)
         {
             if (DataGridCart.SelectedItem is CartItem selectedItem)
@@ -88,11 +89,12 @@ namespace Practik
 
             int clientId = (int)ComboBoxUsers.SelectedValue;
             decimal totalAmount = cart.Sum(c => c.Total);
-
             Orders newOrder = new Orders
             {
                 Client_ID = clientId,
                 OrderDate = DateTime.Now,
+                ShippingDate = DateTime.Now,
+                OrderStatus_ID = 2 // Указываем ID статуса по умолчанию (например, "Новый заказ")
             };
             context.Orders.Add(newOrder);
             context.SaveChanges();

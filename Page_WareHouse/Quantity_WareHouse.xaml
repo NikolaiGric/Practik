@@ -1,4 +1,5 @@
 ﻿<Page x:Class="Practik.Page_WareHouse.Quantity_WareHouse"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -22,7 +23,7 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
         </Grid>
-        <DataGrid x:Name="DGPrCrud" AutoGenerateColumns="False" Grid.Row="1">
+        <DataGrid x:Name="DGPrCrud" AutoGenerateColumns="False" Grid.Row="1" SelectionChanged="DGPrCrud_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding ID_Warehouse}" Header="ID"/>
                 <DataGridTextColumn Binding="{Binding Products.ProductName}" Header="Название продукта"/>
@@ -56,10 +57,10 @@
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <TextBox x:Name="Quantity" Grid.Row="0" Grid.Column="0" Width="200" Height="30" Text="Количество"/>
-                <ComboBox x:Name="ComboBoxSection" Grid.Row="0" Grid.Column="1" Width="200" Height="30"/>
-                <ComboBox x:Name="ComboBoxShelf" Grid.Row="1" Grid.Column="0" Width="200" Height="30"/>
-                <ComboBox x:Name="ComboBoxRack" Grid.Row="1" Grid.Column="1" Width="200" Height="30"/>
+                <TextBox x:Name="Quantity" Grid.Row="0" Grid.Column="0" Width="200" Height="30" materialDesign:HintAssist.Hint="Секция"/>
+                <ComboBox x:Name="ComboBoxSection" Grid.Row="0" Grid.Column="1" Width="200" Height="30" materialDesign:HintAssist.Hint="Секция"/>
+                <ComboBox x:Name="ComboBoxShelf" Grid.Row="1" Grid.Column="0" Width="200" Height="30" materialDesign:HintAssist.Hint="Полка"/>
+                <ComboBox x:Name="ComboBoxRack" Grid.Row="1" Grid.Column="1" Width="200" Height="30" materialDesign:HintAssist.Hint="Ящик"/>
             </Grid>
         </Grid>
     </Grid>

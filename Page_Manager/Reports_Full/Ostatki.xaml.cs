@@ -60,11 +60,14 @@ namespace Practik.Page_Manager.Reports_Full
                         table.AddHeaderCell("Осталось на складе");
 
                         // Заполнение таблицы данными
-                        foreach (var item in FiltrationDgr.ItemsSource)
+                        foreach (var item in context.Warehouse.ToList())
                         {
-                            dynamic row = item;
-                            table.AddCell(row.ProductName.ToString());
-                            table.AddCell(row.Quantity.ToString());
+                            var product = context.Products.FirstOrDefault(p => p.ID_Product == item.Product_ID);
+                            if (product != null)
+                            {
+                                table.AddCell(product.ProductName); 
+                                table.AddCell(item.Quantity.ToString());
+                            }
                         }
 
                         document.Add(table);

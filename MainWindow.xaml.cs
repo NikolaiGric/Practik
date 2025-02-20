@@ -17,9 +17,6 @@ namespace Practik
         public MainWindow()
         {
             InitializeComponent();
-            Administrator_Wh ad = new Administrator_Wh();
-            ad.Show();
-            this.Close();
         }
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
