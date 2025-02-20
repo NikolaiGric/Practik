@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="SelectProductWindow" Height="450" Width="800">
     <Grid>
-        <Grid.RowDefinitions>
+        <!--<Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
@@ -23,7 +23,7 @@
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
             <TextBox x:Name="QuantityTextBox" Width="50" Margin="5"/>
             <Button Content="Выбрать" Click="SelectProduct_Click" Width="100"/>
-        </StackPanel>
+        </StackPanel>-->
     </Grid>
 </Window>
 

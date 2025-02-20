@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Practik.Page_Admin.Reports_Full"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Money">
+      Title="Отчет о накладных">
 
     <Grid>
         <Grid.RowDefinitions>

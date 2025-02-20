@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Practik.Page_Admin.Reports_Full"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Old">
+      Title="Отчет об остатках">
 
     <Grid>
         <Grid.RowDefinitions>

@@ -1,151 +1,136 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
-namespace Practik.Page_Manager
+namespace Practik
 {
-    /// <summary>
-    /// Логика взаимодействия для Manager_Orders.xaml
-    /// </summary>
     public partial class Manager_Orders : Page
     {
-        private WarehouseManagementEntities _context = new WarehouseManagementEntities();
-        private List<OrderItem> _cart = new List<OrderItem>(); // Корзина в памяти
-        private int productId;
-        private int orderedQuantity;
+        private WarehouseManagementEntities context = new WarehouseManagementEntities();
+        private List<CartItem> cart = new List<CartItem>();
 
         public Manager_Orders()
         {
             InitializeComponent();
-            CartDataGrid.ItemsSource = _cart;
+            LoadUsers();
+            UpdateCart();
         }
 
-        // Добавление товара в корзину
-        private void AddToCart_Click(object sender, RoutedEventArgs e)
+        private void LoadUsers()
         {
-            var productWindow = new SelectProductWindow(); // Окно выбора товара
-            if (productWindow.ShowDialog() == true)
+            var users = context.Clients.Select(c => new { c.ID_Client, c.NameClient }).ToList();
+            ComboBoxUsers.ItemsSource = users;
+            ComboBoxUsers.DisplayMemberPath = "FullName";
+            ComboBoxUsers.SelectedValuePath = "ID_Client";
+        }
+
+        private void ButtonAddProduct_Click(object sender, RoutedEventArgs e)
+        {
+            SelectProductWindow selectProductWindow = new SelectProductWindow();
+            if (selectProductWindow.ShowDialog() == true)
             {
-                var selectedProduct = productWindow.SelectedProduct;
-                int quantity = productWindow.SelectedQuantity;
+                var selectedProduct = selectProductWindow.SelectedProduct;
+                var quantity = selectProductWindow.SelectedQuantity;
 
                 if (selectedProduct != null && quantity > 0)
                 {
-                    decimal total = selectedProduct.Price * quantity;
-                    _cart.Add(new OrderItem
+                    var existingItem = cart.FirstOrDefault(c => c.ProductID == selectedProduct.ID_Product);
+                    if (existingItem != null)
                     {
-                        ProductID = selectedProduct.ID_Product,
-                        ProductName = selectedProduct.ProductName,
-                        Quantity = quantity,
-                        Price = selectedProduct.Price,
-                        TotalAmount = total
-                    });
-
-                    CartDataGrid.Items.Refresh();
-                }
-            }
-        }
-
-        // Удаление товара из корзины
-        private void RemoveFromCart_Click(object sender, RoutedEventArgs e)
-        {
-            if (CartDataGrid.SelectedItem is OrderItem selectedItem)
-            {
-                _cart.Remove(selectedItem);
-                CartDataGrid.Items.Refresh();
-            }
-        }
-
-        // Оформление заказа
-        private void Checkout_Click(object sender, RoutedEventArgs e)
-        {
-            if (_cart.Count == 0)
-            {
-                MessageBox.Show("Корзина пуста!");
-                return;
-            }
-
-            // Создание заказа
-            Orders newOrder = new Orders
-            {
-                OrderDate = DateTime.Now,
-                Client_ID = 1, // Можно добавить выбор клиента
-                OrderStatus_ID = 1 // "В обработке"
-            };
-
-            _context.Orders.Add(newOrder);
-            _context.SaveChanges();
-
-            int orderId = newOrder.ID_Order; // Получаем ID созданного заказа
-
-            // Добавление товаров в OrderDetails
-            foreach (var item in _cart)
-            {
-                OrderDetails orderDetail = new OrderDetails
-                {
-                    Order_ID = orderId,
-                    Product_ID = item.ProductID,
-                    Quantity = item.Quantity,
-                    TotalAmount = item.TotalAmount
-                };
-
-                _context.OrderDetails.Add(orderDetail);
-
-                // Обновляем остаток товара на складе
-                // Получаем количество товара на складе
-                var warehouseEntry = _context.Warehouse.FirstOrDefault(w => w.Product_ID == productId);
-
-                if (warehouseEntry != null)
-                {
-                    int availableQuantity = warehouseEntry.Quantity;
-
-                    if (orderedQuantity <= availableQuantity)
-                    {
-                        // Списываем товар со склада
-                        warehouseEntry.Quantity -= orderedQuantity;
-                        _context.SaveChanges();
+                        existingItem.Quantity += quantity;
                     }
                     else
                     {
-                        MessageBox.Show($"Недостаточно товара на складе! Доступно: {availableQuantity}");
+                        cart.Add(new CartItem
+                        {
+                            ProductID = selectedProduct.ID_Product,
+                            ProductName = selectedProduct.ProductName,
+                            Quantity = quantity,
+                            Price = selectedProduct.Price,
+                            Total = quantity * selectedProduct.Price
+                        });
                     }
+                    UpdateCart();
                 }
-                else
-                {
-                    MessageBox.Show("Товар отсутствует на складе!");
-                }
-
-                _context.SaveChanges();
-
-                // Открываем окно оплаты
-                PaymentWindow paymentWindow = new PaymentWindow(orderId);
-                paymentWindow.ShowDialog();
-
-                MessageBox.Show("Заказ оформлен!");
-                _cart.Clear();
-                CartDataGrid.Items.Refresh();
             }
         }
 
-        // Класс для хранения товаров в корзине
-        public class OrderItem
+        private void ButtonRemoveProduct_Click(object sender, RoutedEventArgs e)
         {
-            public int ProductID { get; set; }
-            public string ProductName { get; set; }
-            public int Quantity { get; set; }
-            public decimal Price { get; set; }
-            public decimal TotalAmount { get; set; }
+            if (DataGridCart.SelectedItem is CartItem selectedItem)
+            {
+                cart.Remove(selectedItem);
+                UpdateCart();
+            }
         }
+
+        private void UpdateCart()
+        {
+            DataGridCart.ItemsSource = null;
+            DataGridCart.ItemsSource = cart;
+        }
+
+        private void ButtonCheckout_Click(object sender, RoutedEventArgs e)
+        {
+            if (!cart.Any())
+            {
+                MessageBox.Show("Корзина пуста!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            if (ComboBoxUsers.SelectedValue == null)
+            {
+                MessageBox.Show("Выберите пользователя!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            int clientId = (int)ComboBoxUsers.SelectedValue;
+            decimal totalAmount = cart.Sum(c => c.Total);
+
+            Orders newOrder = new Orders
+            {
+                Client_ID = clientId,
+                OrderDate = DateTime.Now,
+            };
+            context.Orders.Add(newOrder);
+            context.SaveChanges();
+
+            foreach (var item in cart)
+            {
+                decimal itemTotal = item.Quantity * item.Price;
+                totalAmount += itemTotal;
+
+                OrderDetails orderDetail = new OrderDetails
+                {
+                    Order_ID = newOrder.ID_Order,
+                    Product_ID = item.ProductID,
+                    Quantity = item.Quantity,
+                    TotalAmount = item.Total
+                };
+                context.OrderDetails.Add(orderDetail);
+
+                var product = context.Warehouse.FirstOrDefault(p => p.Product_ID == item.ProductID);
+                if (product != null)
+                {
+                    product.Quantity -= item.Quantity;
+                }
+            }
+
+            context.SaveChanges();
+            cart.Clear();
+            UpdateCart();
+            MessageBox.Show("Заказ успешно оформлен!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+    }
+
+    public class CartItem
+    {
+        public int ProductID { get; set; }
+        public string ProductName { get; set; }
+        public int Quantity { get; set; }
+        public decimal Price { get; set; }
+        public decimal Total { get; set; }
     }
 }

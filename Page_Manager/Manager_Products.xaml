@@ -7,23 +7,19 @@
       xmlns:local="clr-namespace:Practik.Page_Manager"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Manager_Products">
+      Title="Продукты">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="74*"/>
             <RowDefinition Height="190*"/>
             <RowDefinition Height="161*"/>
         </Grid.RowDefinitions>
-        <Frame x:Name="PageFrame" Grid.Row="0" Grid.RowSpan="3" Navigated="PageFrame_Navigated"/>
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button FontSize="20" Grid.Column="0" x:Name="Products" Height="55" Click="Products_Click">Товары</Button>
-            <Button FontSize="20" Grid.Column="1" x:Name="Orders" Height="55" Click="Orders_Click" >Заказы</Button>
-            <Button FontSize="20" Grid.Column="2" x:Name="Reports" Height="55" Click="Reports_Click">Отчеты</Button>
         </Grid>
         <DataGrid x:Name="FiltrationDgr" Grid.Row="1"
       Width="770"
@@ -69,18 +65,11 @@
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-
-                <!-- Поиск по названию товара -->
                 <TextBox Grid.Row="0" x:Name="Search0" materialDesign:HintAssist.Hint="Поиск по названию товара"/>
-                 <!--Поиск по номеру заказа--> 
                 <TextBox Grid.Row="1" x:Name="Search1" materialDesign:HintAssist.Hint="Поиск по номеру заказа"/>
-                 <!--Цена от--> 
                 <TextBox Grid.Row="2" x:Name="Search2" materialDesign:HintAssist.Hint="Цена от"/>
-                 <!--Цена до--> 
                 <TextBox Grid.Row="3" x:Name="Search3" materialDesign:HintAssist.Hint="Цена до"/>
-                 <!--Выберите категорию--> 
                 <ComboBox Grid.Row="4" x:Name="Search4" materialDesign:HintAssist.Hint="Выберите категорию" SelectionChanged="Search4_SelectionChanged" />
-                 <!--Выберите производителя--> 
                 <ComboBox Grid.Row="5" x:Name="Search5" materialDesign:HintAssist.Hint="Выберите производителя" SelectionChanged="Search5_SelectionChanged" />
             </Grid>
             <Grid Grid.Column="1">
@@ -91,15 +80,10 @@
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <!-- Кнопка "Поиск 1" -->
                 <Button Grid.Row="0" Content="Поиск 1" Click="Search1_Click"/>
-                <!-- Кнопка "Поиск 2" -->
                 <Button Grid.Row="1" Content="Поиск 2" Click="Search2_Click"/>
-                <!-- Кнопка "Поиск 3" -->
                 <Button Grid.Row="2" Content="Поиск 3" Click="Search3_Click"/>
-                <!-- Кнопка "Поиск 4" -->
                 <Button Grid.Row="3" Content="Поиск 4" Click="Search4_Click"/>
-                <!-- Кнопка "Очистить" -->
                 <Button Grid.Row="4" Content="Очистить" Click="Clear_Click"/>
             </Grid>
         </Grid>

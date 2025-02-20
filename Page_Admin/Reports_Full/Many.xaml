@@ -15,7 +15,6 @@
             <RowDefinition Height="100*"/>
         </Grid.RowDefinitions>
 
-        <!-- Таблица с данными -->
         <DataGrid x:Name="SalesReportDgr" Grid.Row="1"
                   Width="770"
                   AutoGenerateColumns="False"

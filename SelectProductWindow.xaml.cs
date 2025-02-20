@@ -1,47 +1,50 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Practik
 {
-    /// <summary>
-    /// Логика взаимодействия для SelectProductWindow.xaml
-    /// </summary>
     public partial class SelectProductWindow : Window
     {
-        private WarehouseManagementEntities _context = new WarehouseManagementEntities();
+        private WarehouseManagementEntities context = new WarehouseManagementEntities();
         public Products SelectedProduct { get; private set; }
         public int SelectedQuantity { get; private set; }
 
         public SelectProductWindow()
         {
             InitializeComponent();
-            ProductsDataGrid.ItemsSource = _context.Products.ToList();
+            //LoadProducts();
         }
 
-        private void SelectProduct_Click(object sender, RoutedEventArgs e)
-        {
-            if (ProductsDataGrid.SelectedItem is Products product && int.TryParse(QuantityTextBox.Text, out int quantity) && quantity > 0)
-            {
-                SelectedProduct = product;
-                SelectedQuantity = quantity;
-                DialogResult = true;
-            }
-            else
-            {
-                MessageBox.Show("Выберите товар и введите корректное количество!");
-            }
-        }
+        //private void LoadProducts()
+        //{
+        //    var products = context.Products
+        //        .Select(p => new
+        //        {
+        //            p.ID_Product,
+        //            p.ProductName,
+        //            p.Price,
+        //            Quantity = context.Warehouse.Where(w => w.ID_Product == p.ID_Product).Sum(w => w.Quantity)
+        //        }).ToList();
 
+        //    DataGridProducts.ItemsSource = products;
+        //}
+
+        //private void ButtonSelect_Click(object sender, RoutedEventArgs e)
+        //{
+        //    if (DataGridProducts.SelectedItem is dynamic selectedProduct)
+        //    {
+        //        if (int.TryParse(TextBoxQuantity.Text, out int quantity) && quantity > 0)
+        //        {
+        //            SelectedProduct = context.Products.Find(selectedProduct.ID_Product);
+        //            SelectedQuantity = quantity;
+        //            DialogResult = true;
+        //            Close();
+        //        }
+        //        else
+        //        {
+        //            MessageBox.Show("Введите корректное количество!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+        //        }
+        //    }
+        //}
     }
 }

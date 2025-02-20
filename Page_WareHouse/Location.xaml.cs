@@ -1,17 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Practik.Page_WareHouse
 {
@@ -21,55 +12,134 @@ namespace Practik.Page_WareHouse
     public partial class Location : Page
     {
         WarehouseManagementEntities context = new WarehouseManagementEntities();
+
         public Location()
         {
             InitializeComponent();
+            LoadData();
+        }
+
+        #region Методы
+        /// <summary>
+        /// Загружает данные из базы в DataGrid
+        /// </summary>
+        private void LoadData()
+        {
             DGPrCrud.ItemsSource = context.ProductLocation.ToList();
         }
 
+        /// <summary>
+        /// Очищает поля ввода
+        /// </summary>
+        private void ClearFields()
+        {
+            Sections.Text = string.Empty;
+            Shelfs.Text = string.Empty;
+            Racks.Text = string.Empty;
+        }
+
+        /// <summary>
+        /// Проверяет корректность введенных данных
+        /// </summary>
+        private bool ValidateInputs()
+        {
+            if (string.IsNullOrWhiteSpace(Sections.Text))
+            {
+                MessageBox.Show("Поле 'Секция' не может быть пустым!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+
+            if (!int.TryParse(Shelfs.Text, out int shelf) || shelf <= 0)
+            {
+                MessageBox.Show("Поле 'Стеллаж' должно быть положительным числом!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+
+            if (!int.TryParse(Racks.Text, out int rack) || rack <= 0)
+            {
+                MessageBox.Show("Поле 'Полка' должно быть положительным числом!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+
+            return true;
+        }
+        #endregion
+
+        #region CRUD операции
         private void Create_Click(object sender, RoutedEventArgs e)
         {
-            ProductLocation loc = new ProductLocation();
-            loc.Section = Sections.Text;
-            loc.Shelf = Convert.ToInt32(Shelfs.Text);
-            loc.Rack = Convert.ToInt32(Racks.Text);
+            if (!ValidateInputs()) return;
+
+            ProductLocation loc = new ProductLocation
+            {
+                Section = Sections.Text,
+                Shelf = int.Parse(Shelfs.Text),
+                Rack = int.Parse(Racks.Text)
+            };
 
             context.ProductLocation.Add(loc);
             context.SaveChanges();
-            DGPrCrud.ItemsSource = context.ProductLocation.ToList();
-
+            LoadData();
+            ClearFields();
         }
 
         private void Update_Click(object sender, RoutedEventArgs e)
         {
-            if (DGPrCrud.SelectedItem != null)
+            if (DGPrCrud.SelectedItem is ProductLocation selected)
             {
-                var selected = DGPrCrud.SelectedItem as ProductLocation;
+                if (!ValidateInputs()) return;
 
                 selected.Section = Sections.Text;
-                selected.Shelf = string.IsNullOrWhiteSpace(Shelfs.Text) ? 0 : Int32.Parse(Shelfs.Text);
-                selected.Rack = string.IsNullOrWhiteSpace(Racks.Text) ? 0 : Int32.Parse(Racks.Text);
+                selected.Shelf = int.Parse(Shelfs.Text);
+                selected.Rack = int.Parse(Racks.Text);
 
                 context.SaveChanges();
-                DGPrCrud.ItemsSource = context.ProductLocation.ToList();
-
+                LoadData();
+                ClearFields();
+            }
+            else
+            {
+                MessageBox.Show("Выберите запись для редактирования!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
-            if (DGPrCrud.SelectedItem != null)
+            if (DGPrCrud.SelectedItem is ProductLocation selected)
             {
-                context.ProductLocation.Remove(DGPrCrud.SelectedItem as ProductLocation);
+                if (MessageBox.Show("Вы уверены, что хотите удалить запись?", "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    context.ProductLocation.Remove(selected);
+                    context.SaveChanges();
+                    LoadData();
+                    ClearFields();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Выберите запись для удаления!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+        #endregion
 
-                context.SaveChanges();
-                DGPrCrud.ItemsSource = context.ProductLocation.ToList();
+        #region Обработчики событий
+        private void DGPrCrud_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (DGPrCrud.SelectedItem is ProductLocation selected)
+            {
+                Sections.Text = selected.Section;
+                Shelfs.Text = selected.Shelf.ToString();
+                Racks.Text = selected.Rack.ToString();
             }
         }
 
-        private void DGPrCrud_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        /// <summary>
+        /// Ограничивает ввод только числами
+        /// </summary>
+        private void NumberValidation(object sender, TextCompositionEventArgs e)
         {
-
+            e.Handled = !int.TryParse(e.Text, out _);
         }
+        #endregion
     }
 }

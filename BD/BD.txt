@@ -1,12 +1,9 @@
-﻿--DROP DATABASE WarehouseManagement;
-
-CREATE DATABASE WarehouseManagement;
+﻿CREATE DATABASE WarehouseManagement;
 GO
-select * from Warehouse;
+
 USE WarehouseManagement;
 GO
-select * from ProductLocation;
---Categories;
+
 -- Таблица ролей
 CREATE TABLE Roles (
     ID_Role INT PRIMARY KEY IDENTITY(1,1),
@@ -187,8 +184,7 @@ INSERT INTO ProductStatuses (ProductStatusName) VALUES
 INSERT INTO Products (ProductName, Article, ProductCategory_ID, Manufacturer_ID, ProductUnit_ID, Discount, Price, ProductStatus_ID) VALUES 
 ('Базальт', '1236894823', 1, 1, 1, 300, 1000, 1),
 ('Красный кирпич', '654789321', 2, 2, 1, NULL, 50, 1);
-select * from OrderDetails;
-select * from Orders;
+
 -- Локация на складе
 INSERT INTO ProductLocation (Section, Shelf, Rack) VALUES 
 ('А', 15, 3),

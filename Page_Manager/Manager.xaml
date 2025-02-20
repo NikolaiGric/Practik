@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Practik"
         mc:Ignorable="d"
-        Title="Administrator_wh" Height="450" Width="1000">
+        Title="Менеджер" Height="450" Width="1000">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="74*"/>
